@@ -27,9 +27,10 @@ namespace PeliculasAPI.Controllers
         {
             return repositorio.ObtenerTodosLosGeneros();
         }
+        
 
         [HttpGet]
-        [Route("{Id:int}/{Nombre:Roberto}")]
+        [Route("{Id:int}/{Nombre=Roberto}")]
         public Genero Get(int Id, string Nombre)
         {
             var genero = repositorio.ObtenerPorId(Id);
