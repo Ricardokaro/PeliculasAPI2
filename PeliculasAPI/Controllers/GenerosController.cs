@@ -20,14 +20,17 @@ namespace PeliculasAPI.Controllers
             this.repositorio = repositorio;
         }
 
-        [HttpGet]
+        [HttpGet]// api/generos
+        [HttpGet("listado")]// api/generos/listado
+        [HttpGet("listadogeneros")]// api/generos/listadogeneros
         public List<Genero> Get()
         {
             return repositorio.ObtenerTodosLosGeneros();
         }
 
         [HttpGet]
-        public Genero Get(int Id)
+        [Route("{Id:int}/{Nombre=Roberto}")]
+        public Genero Get(int Id, string Nombre)
         {
             var genero = repositorio.ObtenerPorId(Id);
             if (genero == null)
