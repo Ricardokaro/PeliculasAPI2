@@ -27,6 +27,7 @@ namespace PeliculasAPI.Controllers
         {
             return repositorio.ObtenerTodosLosGeneros();
         }
+        
 
         [HttpGet]
         [Route("{Id:int}/{Nombre=Roberto}")]
