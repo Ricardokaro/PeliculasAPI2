@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PeliculasAPI.Entidades;
 using PeliculasAPI.Repositorios;
 using System;
@@ -29,9 +30,13 @@ namespace PeliculasAPI.Controllers
         }     
 
         [HttpGet]
-        [Route("{Id:int}/{Nombre=Roberto}")]
-        public async Task<ActionResult<Genero>> Get(int Id, string Nombre)
+        [Route("{Id:int}")]
+        public async Task<ActionResult<Genero>> Get(int Id,[FromHeader] string Nombre)
         {
+            if (!ModelState.IsValid) 
+            {
+                return BadRequest(ModelState);
+            } 
             var genero = await repositorio.ObtenerPorId(Id);
             if (genero == null)
             {
@@ -41,7 +46,7 @@ namespace PeliculasAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post()
+        public ActionResult Post([FromBody] Genero genero)
         {
             return NoContent();
         }
