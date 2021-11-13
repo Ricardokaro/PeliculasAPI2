@@ -9,6 +9,6 @@ namespace PeliculasAPI.Repositorios
     public interface IRepositorio
     {
         List<Genero> ObtenerTodosLosGeneros();
-        Genero ObtenerPorId(int Id);
+        Task<Genero> ObtenerPorId(int Id);
     }
 }

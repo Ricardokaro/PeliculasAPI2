@@ -30,9 +30,9 @@ namespace PeliculasAPI.Controllers
 
         [HttpGet]
         [Route("{Id:int}/{Nombre=Roberto}")]
-        public ActionResult<Genero> Get(int Id, string Nombre)
+        public async Task<ActionResult<Genero>> Get(int Id, string Nombre)
         {
-            var genero = repositorio.ObtenerPorId(Id);
+            var genero = await repositorio.ObtenerPorId(Id);
             if (genero == null)
             {
                 NotFound();
