@@ -32,11 +32,7 @@ namespace PeliculasAPI.Controllers
         [HttpGet]
         [Route("{Id:int}")]
         public async Task<ActionResult<Genero>> Get(int Id,[FromHeader] string Nombre)
-        {
-            if (!ModelState.IsValid) 
-            {
-                return BadRequest(ModelState);
-            } 
+        {  
             var genero = await repositorio.ObtenerPorId(Id);
             if (genero == null)
             {
