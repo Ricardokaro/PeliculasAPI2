@@ -15,10 +15,12 @@ namespace PeliculasAPI.Controllers
     public class GenerosController : ControllerBase
     {
         private readonly IRepositorio repositorio;
+        private readonly WeatherForecastController weatherForecastController;
 
-        public GenerosController(IRepositorio repositorio)
+        public GenerosController(IRepositorio repositorio, WeatherForecastController weatherForecastController)
         {
             this.repositorio = repositorio;
+            this.weatherForecastController = weatherForecastController;
         }
 
         [HttpGet]// api/generos
@@ -41,9 +43,20 @@ namespace PeliculasAPI.Controllers
             return genero;
         }
 
+        [HttpGet("{guid}")]        
+        public ActionResult<Guid> GetGuid()
+        {
+            return Ok(new
+            {
+                guid_GenerosController = repositorio.ObtenerGuid(),
+                guid_WeatherForescastController = weatherForecastController.ObtenerGuidWeaterForescatController()
+            });
+        }
+
         [HttpPost]
         public ActionResult Post([FromBody] Genero genero)
         {
+            repositorio.CrearGenero(genero);
             return NoContent();
         }
 
@@ -58,5 +71,7 @@ namespace PeliculasAPI.Controllers
         {
             return NoContent();
         }
+
+       
     }
 }
