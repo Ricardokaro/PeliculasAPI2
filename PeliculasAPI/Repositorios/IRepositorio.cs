@@ -10,5 +10,7 @@ namespace PeliculasAPI.Repositorios
     {
         List<Genero> ObtenerTodosLosGeneros();
         Task<Genero> ObtenerPorId(int Id);
+        Guid ObtenerGuid();
+        void CrearGenero(Genero genero);
     }
 }
