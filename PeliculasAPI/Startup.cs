@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PeliculasAPI.Controllers;
+using PeliculasAPI.Filtros;
 using PeliculasAPI.Repositorios;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,10 @@ namespace PeliculasAPI
             services.AddResponseCaching();
             services.AddSingleton<IRepositorio, RepositorioEnMemoria>();
             services.AddScoped<WeatherForecastController>();
-            services.AddControllers();
+            services.AddTransient<MiFiltroDeAccion>();
+            services.AddControllers(options =>
+                options.Filters.Add(typeof(FiltroDeExcepcion))
+            );
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PeliculasAPI", Version = "v1" });
