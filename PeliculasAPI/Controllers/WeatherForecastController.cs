@@ -39,6 +39,7 @@ namespace PeliculasAPI.Controllers
             .ToArray();
         }
 
+        [HttpGet("{guid}")]
         public Guid ObtenerGuidWeaterForescatController()
         {
             return repositorio.ObtenerGuid();
