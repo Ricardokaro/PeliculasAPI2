@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PeliculasAPI.Entidades;
@@ -12,6 +14,7 @@ namespace PeliculasAPI.Controllers
 {
     [Route("api/generos")]
     [ApiController]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class GenerosController : ControllerBase
     {
         private readonly IRepositorio repositorio;
@@ -28,6 +31,7 @@ namespace PeliculasAPI.Controllers
         [HttpGet]// api/generos
         [HttpGet("listado")]// api/generos/listado
         [HttpGet("listadogeneros")]// api/generos/listadogeneros
+        //[ResponseCache(Duration =60)]        
         public ActionResult<List<Genero>> Get()
         {
             logger.LogInformation("Vamos a mostrar los géneros");
